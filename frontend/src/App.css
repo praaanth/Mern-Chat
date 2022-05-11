@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;1,300;1,400&family=Work+Sans:ital,wght@1,300&display=swap');
+
+
+
+
+.App{
+    font-family: 'Work Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    background-image: url('./background.png');
+    background-size: cover;
+    background-position: center center;
+    color:black;
+}
