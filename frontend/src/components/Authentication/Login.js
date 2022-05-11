@@ -30,7 +30,7 @@ function Login() {
    
     />
   <InputRightElement width="4.5rem">
-    <Button h="1.75rem" size="sm" variantColor="blue"
+    <Button h="1.75rem" size="sm" colorScheme="blue"
     onClick={()=>setShow(!show)}
     >
         {show ? 'Hide' : 'Show'}
@@ -40,7 +40,7 @@ function Login() {
     </InputGroup>
    </FormControl>
 
-   <Button variant="blue"
+   <Button variant="solid" 
     onClick={submitHandler}
     style={{"marginTop": "20px"}}
    colorScheme="blue"

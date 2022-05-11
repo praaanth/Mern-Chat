@@ -11,70 +11,16 @@ function Signup() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [show, setShow] = useState(false)
-    const [pic, setPic] = useState()
-    // eslint-disable-next-line no-unused-vars
-    const [loading, setLoading] = useState(false)
+    
+    
     const toast = useToast()
     const navigate = useNavigate();
 
-    const postDetails = (pics) => {
-        setLoading(true)
-        if(pic===undefined){
-            toast({
-
-                title: 'Please upload a profile picture',
-                description: '',
-                status: 'warning',
-                duration: 5000,
-                isClosable: true,
-                position: 'top-right',
-            });
-            return;
-          }
-          if(pic.type==="image/jpeg"||pic.type==="image/png" || pic.type==="image/jpg"){
-
-           const data = new FormData()
-            data.append('file', pics);
-            data.append('upload_preset', "chat-app");
-            data.append('cloud_name', "dk1wyzhyd");
-            fetch("https://api.cloudinary.com/v1_1/dk1wyzhyd/image/upload", {
-                method: "post",
-                body: data
-            })
-
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data) 
-                   
-                    setPic(data.url.toString())
-                    setLoading(false)
-                }
-                )
-                .catch(err => {
-                    console.log(err)  
-                    setLoading(false)
-                }
-                )
-        }else{
-          toast({
-            title: 'Please upload a valid image',
-            description: '',
-            status: 'warning',
-            duration: 5000,
-            isClosable: true,
-            position: 'top-right',
-          });
-          setLoading(false)
-          return ;
-        }
-      
-        }
-    
-
+   
   
     const submitHandler = async () => {
        
-        setLoading(true)
+        
         if(!name || !email || !password || !confirmPassword){
             toast({
                 title: 'Please fill all the fields',
@@ -85,7 +31,7 @@ function Signup() {
                 position: 'top-right',
     }
             );
-            setLoading(false)
+           
             return;
         }
         if(password !== confirmPassword){
@@ -97,7 +43,7 @@ function Signup() {
                 isClosable: true,
                 position: 'top-right',
             });
-            setLoading(false)
+          
             return;
         }
         // api request to store in database
@@ -109,7 +55,7 @@ function Signup() {
               'Content-Type': 'application/json'
             },
           };
-          const {data}= await axios.post('/api/user', {name,email,password,pic}, config);
+          const {data}= await axios.post('/api/user', {name,email,password}, config);
           toast({
             title: 'User created successfully',
             description: '',
@@ -118,7 +64,7 @@ function Signup() {
             isClosable: true,
             position: 'top-right',
           });
-          setLoading(false)
+          
         // set the user info in localStorage
         localStorage.setItem('userInfo', JSON.stringify(data))
 
@@ -127,14 +73,12 @@ function Signup() {
         catch(err){
           toast({
             title: 'error occured',
-            description: err.response.data.message,
+            description: "err.response.data.message",
             status: 'error',
             duration: 5000,
             isClosable: true,
             position: 'top-right',
           });
-
-          setLoading(false)
         }
     }
 
@@ -201,21 +145,12 @@ function Signup() {
    
     </InputGroup>
    </FormControl>
-   <FormControl id="pic" >
-   <FormLabel>
-   Upload Your Picture
-   </FormLabel>
-   <Input  type="file"
-   p={1.5}
-   onChange={(e)=>postDetails(e.target.files[0])}
-    />
-   </FormControl>
-  
+   
   <Button 
     onClick={submitHandler}
     style={{"marginTop": "20px"}}
    colorScheme="blue"
-    // isLoading={loading}
+   
    w="100%"
     >
     Sign Up

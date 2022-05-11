@@ -4,7 +4,7 @@ import axios from 'axios'
 function Chat() {
   const [chats, setChats] = useState([])
   const fetchData= async ()=> {
-    const {data} = await axios.get('/api/chats')
+    const {data} = await axios.get('/api/user')
     console.log(data);
     setChats(data);
   }

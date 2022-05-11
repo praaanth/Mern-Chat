@@ -17,19 +17,15 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
   // use express router
 
 const app = express()
-// app.use(express.json());
-app.get('/',(req,res)=>{
-    res.send(chats)
+ app.use(express.json());
 
-})
-// // app.use('/api/user',userRoutes);    // use user routes
-// // create middle wares for invalid routes and error handlers
-// app.use(notFound);
-// app.use(errorHandler);
-app.get('/api/chat',(req,res)=>{  
-    res.send(chats)
-}
-)
+ app.get('/', (req, res) => {
+    res.send('Hello World');
+  }
+  );
+
+  app.use('/api/user', userRoutes);
+
 
 
 
